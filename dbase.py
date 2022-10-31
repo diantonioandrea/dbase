@@ -1,7 +1,7 @@
 from colorama import Fore, Back, Style
 import CLIbrary
 
-# Database utility built using CLIbrary
+# Database utility built with CLIbrary
 
 class dbase:
 	def __init__(self, name) -> None:
