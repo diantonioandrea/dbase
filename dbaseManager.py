@@ -1,23 +1,46 @@
 # Interface for dbase built with CLIbrary
 
 from colorama import Fore, Back, Style
-import CLIbrary
+import CLIbrary, dbase
 import os, sys
 
-try:
-	cmdString = os.getlogin() + "@dbase"
+dataPath = str(os.getcwd()) + "/data"
+
+try: # Check the existence or create the data folder.
+	if not os.path.exists(dataPath):
+		os.makedirs(dataPath)
+	
 except:
-	cmdString = "unknown@dbase"
+	print(Back.RED + Fore.WHITE + "DATA ERROR" + Style.RESET_ALL)
+	sys.exit(-1)
 
 print("dbaseManager")
 print("Wrapper for dbase written in Python and built with CLIbrary for database management")
-print("Developed by Andrea Di Antonio")
+print("Developed by Andrea Di Antonio, more on https://github.com/diantonioandrea/dbase \n")
+
+# Interface
+
+current = None
 
 while True:
+	try: # Define a "shell prompt".
+		cmdString = os.getlogin() + "@dbase"
+	except:
+		cmdString = "unknown@dbase"
+
+	if current != None:
+		cmdString += "+" + current.name
+
 	cmdHandler = {}
 	cmdHandler["request"] = cmdString
 	cmdHandler["style"] = Back.GREEN + Fore.MAGENTA
-	cmdHandler["allowedCommands"] = []
+	cmdHandler["allowedCommands"] = ["new", "load"]
+
+	if current != None:
+		cmdHandler["allowedCommands"] += ["add", "info", "show"]
+
+		dumpHandler = {"path": dataPath + "/" + current.name + ".db", "data": current}
+		CLIbrary.aDump(dumpHandler)
 
 	command = CLIbrary.cmdIn(cmdHandler)
 
@@ -27,3 +50,31 @@ while True:
 
 	if cmd == "exit":
 		break
+
+	if cmd == "new":
+		current = dbase.dbase(CLIbrary.strIn({"request": "Database name", "noSpace": True}))
+		continue
+
+	if cmd == "load":
+		toBeLoaded = ""
+
+		for opt in sdOpts:
+			if opt[0] == "-n":
+				toBeLoaded = "/" + opt[1] + ".db"
+				break
+
+		loadHandler = {"path": dataPath + toBeLoaded}
+		current = CLIbrary.aLoad(loadHandler)
+		continue
+
+	if cmd == "add":
+		current.addEntry()
+		continue
+
+	if cmd == "info":
+		print(str(current))
+		continue
+
+	if cmd == "show":
+		print(current.showEntries(sdOpts))
+		continue
