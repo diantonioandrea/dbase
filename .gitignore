@@ -1,3 +1,10 @@
 # DBASE
 
 data
+dbase # From: make dbase
+
+# PYINSTALLER, from: make manager
+
+build
+dist
+*.spec

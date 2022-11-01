@@ -55,13 +55,13 @@ class dbase:
 
 		if newField["id"] != "sorter":
 			typeHandler["allowedAnswers"].append("boolean")
-
-		newField["type"] = CLIbrary.strIn(typeHandler)
 		
 		if newField["id"] == "sorter":
 			fieldHandler["request"] = "Sorter field identifier"
 			newField["id"] = CLIbrary.strIn(fieldHandler)
 			self.sorter = newField["id"]
+
+		newField["type"] = CLIbrary.strIn(typeHandler)
 			
 		self.fields.append(newField)
 		print("Field added")
@@ -110,7 +110,10 @@ class dbaseEntry:
 		self.fields["serial"] = database.serialCounter
 		
 		self.insertField(database.fields)
-				
+		
+	def getStringSerial(self):
+		return Fore.MAGENTA + str(self.fields["serial"]) + Style.RESET_ALL
+
 	def __str__(self) -> str:
 		string = Back.WHITE + "Serial: " + self.getStringSerial()
 		
@@ -119,9 +122,6 @@ class dbaseEntry:
 				string += "\n\t" + field + ": " + str(self.fields[field])
 				
 		return string
-
-	def getStringSerial(self):
-		return Fore.MAGENTA + str(self.fields["serial"]) + Style.RESET_ALL
 		
 	def insertField(self, fields) -> None:
 		print("Insert field(s) for serial: " + self.getStringSerial())
