@@ -1,10 +1,14 @@
 # DBASE
 
 data
-dbase # From: make dbase
 
-# PYINSTALLER, from: make manager
+# MAKE DBASE
+
+dbase
+
+# MAKE MANAGER
 
 build
 dist
 *.spec
+dbaseManager

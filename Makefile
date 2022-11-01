@@ -1,5 +1,6 @@
 manager:
 	pyinstaller --onefile --console dbaseManager.py
+	mv dist/dbaseManager .
 
 dbase:
 	mkdir dbase
@@ -9,4 +10,4 @@ dbase:
 
 clean:
 	rm -rf dist build dbase data
-	rm *.spec
+	rm *.spec dbaseManager
