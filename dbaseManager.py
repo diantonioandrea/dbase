@@ -58,13 +58,18 @@ while True:
 	if cmd == "load":
 		toBeLoaded = ""
 
-		for opt in sdOpts:
-			if opt[0] == "-n":
-				toBeLoaded = "/" + opt[1] + ".db"
-				break
+		if "n" in sdOpts:
+			toBeLoaded = "/" + sdOpts["n"] + ".db"
+
+		else:
+			print(Back.RED + Fore.WHITE + "MISSING OPTION" + Style.RESET_ALL)
+			continue
 
 		loadHandler = {"path": dataPath + toBeLoaded}
 		current = CLIbrary.aLoad(loadHandler)
+		continue
+
+	if current == None:
 		continue
 
 	if cmd == "add":

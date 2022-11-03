@@ -12,3 +12,7 @@ build
 dist
 *.spec
 dbaseManager
+
+# OTHERS
+
+.vscode
