@@ -1,3 +1,5 @@
+![License](https://img.shields.io/github/license/diantonioandrea/dbase)
+
 # dbase
 
 Database utility written in Python and built with [CLIbrary](https://github.com/diantonioandrea/CLIbrary).
