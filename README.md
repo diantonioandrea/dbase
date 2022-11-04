@@ -1,4 +1,5 @@
-![License](https://img.shields.io/github/license/diantonioandrea/dbase)
+[![GitHub license](https://img.shields.io/github/license/diantonioandrea/dbase)](https://github.com/diantonioandrea/dbase/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/diantonioandrea/dbase)](https://github.com/diantonioandrea/dbase/stargazers)
 
 # dbase
 
