@@ -5,6 +5,7 @@ import CLIbrary, dbase
 import os, sys
 
 dataPath = str(os.getcwd()) + "/data"
+helpPath = str(os.getcwd()) + "/dbaseHelp.json"
 
 try: # Check the existence or create the data folder.
 	if not os.path.exists(dataPath):
@@ -33,8 +34,9 @@ while True:
 
 	cmdHandler = {}
 	cmdHandler["request"] = cmdString
-	cmdHandler["style"] = Back.GREEN + Fore.MAGENTA
+	cmdHandler["style"] = Fore.MAGENTA
 	cmdHandler["allowedCommands"] = ["new", "load"]
+	cmdHandler["helpPath"] = helpPath
 
 	if current != None:
 		cmdHandler["allowedCommands"] += ["add", "info", "show"]
@@ -47,9 +49,13 @@ while True:
 	cmd = command["command"]
 	sdOpts = command["sdOpts"]
 	ddOpts = command["ddOpts"]
+	output = command["output"]
 
 	if cmd == "exit":
 		break
+
+	if cmd == "help":
+		print(output)
 
 	if cmd == "new":
 		current = dbase.dbase(CLIbrary.strIn({"request": "Database name", "noSpace": True}))

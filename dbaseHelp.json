@@ -1,0 +1,22 @@
+{
+	"exit": {
+		"description": "Exits the program."
+	},
+	"new": {
+		"description": "Creates a new database."
+	},
+	"load": {
+		"mandatoryOptions": "-n DATABASE_NAME",
+		"description": "Loads the specified database from a .db file."
+	},
+	"add": {
+		"description": "Adds a new entry."
+	},
+	"info": {
+		"description": "Shows database's infos."
+	},
+	"show": {
+		"options": "-FIELD_1 QUERY_1 ... -FIELD_N QUERY_N",
+		"description": "Prints the database entries with optional queries passed as single dash options."
+	}
+}

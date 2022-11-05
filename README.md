@@ -21,26 +21,4 @@ and inserting the resulting folder into the project, remembering to import **dba
 
 ## Commands
 
-	exit
-
-Exits **dbaseManager**.
-
-	new
-
-Creates a new database.
-
-	load -n FILENAME
-
-Loads an existing database from a *.db* file.
-
-	add
-
-Adds a new entry to the database.
-
-	info
-
-Shows infos on the database.
-
-	show [-FIELD_1 QUERY_1 ... -FIELD_N QUERY_N]
-
-Prints the database entry with optional queries passed as single dash options.
+**dbaseManager** supports its own help through **CLIbrary**'s help system.
