@@ -17,7 +17,8 @@ except:
 
 print("dbaseManager")
 print("Wrapper for dbase written in Python and built with CLIbrary for database management")
-print("Developed by Andrea Di Antonio, more on https://github.com/diantonioandrea/dbase \n")
+print("Developed by Andrea Di Antonio, more on https://github.com/diantonioandrea/dbase")
+print("Type \'help\' if needed\n")
 
 # Interface
 
