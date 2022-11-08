@@ -36,11 +36,15 @@ while True:
 	cmdHandler = {}
 	cmdHandler["request"] = cmdString
 	cmdHandler["style"] = Fore.MAGENTA
+	cmdHandler["verboseStyle"] = Back.YELLOW
 	cmdHandler["allowedCommands"] = ["new", "load"]
 	cmdHandler["helpPath"] = helpPath
 
 	if current != None:
 		cmdHandler["allowedCommands"] += ["add", "info", "show"]
+
+		if len(current.entries) > 0:
+			cmdHandler["allowedCommands"] += ["emod", "edel"]
 
 		dumpHandler = {"path": dataPath + "/" + current.name + ".db", "data": current}
 		CLIbrary.aDump(dumpHandler)
@@ -79,6 +83,31 @@ while True:
 	if current == None:
 		continue
 
+	if cmd == "edel":
+		serial = -1
+
+		if "s" in sdOpts:
+			try:
+				serial = max([int(sdOpts["s"]), -1])
+
+			except(ValueError):
+				print(Back.RED + Fore.WHITE + "SERIAL ERROR" + Style.RESET_ALL)
+				continue
+		
+		else:
+			print(Back.RED + Fore.WHITE + "MISSING OPTION" + Style.RESET_ALL)
+			continue
+
+		toBeRemoved = None
+
+		for entry in current.entries:
+			if entry.fields["serial"] == serial:
+				current.entries.remove(entry)
+
+				print(entry)
+				print(cmdHandler["verboseStyle"] + "Deleted" + Style.RESET_ALL)
+				break
+
 	if cmd == "add":
 		bulkNumber = 1
 
@@ -88,6 +117,7 @@ while True:
 
 			except(ValueError):
 				bulkNumber = 1
+				print(Back.RED + Fore.WHITE + "ARGUMENT ERROR, FALLING BACK TO 1" + Style.RESET_ALL)
 
 		for _ in range(bulkNumber):
 			current.addEntry()
