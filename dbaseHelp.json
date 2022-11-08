@@ -19,5 +19,13 @@
 	"show": {
 		"options": "-FIELD_1 QUERY_1 ... -FIELD_N QUERY_N",
 		"description": "Prints the database entries with optional queries passed as single dash options."
+	},
+	"edel": {
+		"mandatoryOptions": "-s ENTRY_SERIAL",
+		"description": "Deletes the specified entry by passing its serial number."
+	},
+	"emod": {
+		"mandatoryOptions": "-s ENTRY_SERIAL",
+		"description": "Rewrites the specified entry by passing its serial number."
 	}
 }
