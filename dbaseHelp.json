@@ -10,7 +10,8 @@
 		"description": "Loads the specified database from a .db file."
 	},
 	"add": {
-		"description": "Adds a new entry."
+		"description": "Adds a new entry.",
+		"options": "-n ENTRIES_NUMBER"
 	},
 	"info": {
 		"description": "Shows database's infos."
