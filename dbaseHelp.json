@@ -23,9 +23,5 @@
 	"edel": {
 		"mandatoryOptions": "-s ENTRY_SERIAL",
 		"description": "Deletes the specified entry by passing its serial number."
-	},
-	"emod": {
-		"mandatoryOptions": "-s ENTRY_SERIAL",
-		"description": "Rewrites the specified entry by passing its serial number."
 	}
 }

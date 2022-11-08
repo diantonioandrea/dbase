@@ -44,7 +44,7 @@ while True:
 		cmdHandler["allowedCommands"] += ["add", "info", "show"]
 
 		if len(current.entries) > 0:
-			cmdHandler["allowedCommands"] += ["emod", "edel"]
+			cmdHandler["allowedCommands"] += ["edel"]
 
 		dumpHandler = {"path": dataPath + "/" + current.name + ".db", "data": current}
 		CLIbrary.aDump(dumpHandler)
