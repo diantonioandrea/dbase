@@ -77,9 +77,9 @@ class dbase:
 		self.sort()
 		toBeShown = self.entries
 		
-		for sdOption in sdOpts:
+		for queryKey in sdOpts:
 			try:
-				toBeShown = [entry for entry in toBeShown if sdOption[1] in str(entry.fields[sdOption[0].replace("-", "")])]
+				toBeShown = [entry for entry in toBeShown if sdOpts[queryKey] in str(entry.fields[queryKey])]
 				
 			except:
 				pass

@@ -80,7 +80,17 @@ while True:
 		continue
 
 	if cmd == "add":
-		current.addEntry()
+		bulkNumber = 1
+
+		if "n" in sdOpts:
+			try:
+				bulkNumber = max([int(sdOpts["n"]), 1])
+
+			except(ValueError):
+				bulkNumber = 1
+
+		for _ in range(bulkNumber):
+			current.addEntry()
 		continue
 
 	if cmd == "info":
