@@ -5,14 +5,15 @@ import CLIbrary
 
 class dbase:
 	def __init__(self, name) -> None:
-		self.name = name
-		self.entries = []
-		self.fields = []
+		self.name = name # Database name.
+		self.entries = [] # Databse entries.
+		self.fields = [] # Database fields.
 		
-		self.sorter = ""
+		self.sorter = "" # Database sorter field.
 		
-		self.serialCounter = 0
+		self.serialCounter = 0 # Serial counter which gets updated on each new entry.
 		
+		# Initialization fields.
 		while True:
 			if CLIbrary.boolIn({"request": "Add a new field"}):
 				self.addField()
@@ -21,7 +22,7 @@ class dbase:
 				if len(self.fields) > 0:
 					break
 		
-	def __str__(self) -> str:
+	def __str__(self) -> str: # Prints the database's infos.
 		string = "Database: " + self.name + "\nEntries: " + str(len(self.entries))
 
 		if self.sorter != "":
@@ -34,13 +35,13 @@ class dbase:
 			
 		return string
 	
-	def addEntry(self) -> None:
+	def addEntry(self) -> None: # Adds a new entry.
 		newEntry = dbaseEntry(self)
 		self.serialCounter += 1
 		
 		self.entries.append(newEntry)
 			
-	def addField(self) -> None:
+	def addField(self) -> None: # Adds a new field.
 		newField = {}
 
 		fieldHandler = {}
@@ -66,13 +67,13 @@ class dbase:
 		self.fields.append(newField)
 		print("Field added")
 		
-		# Update all entries if any
+		# Update all entries if any.
 		
 		for entry in self.entries:
 			entry.insertFields([newField])
 			
-	def showEntries(self, sdOpts=[]) -> str:
-		# sdOpts work as queries
+	def showEntries(self, sdOpts=[]) -> str: # Shows and queries entries.
+		# sdOpts work as queries.
 		
 		self.sort()
 		toBeShown = self.entries
@@ -97,7 +98,7 @@ class dbase:
 			
 		return string
 		
-	def sort(self) -> None:
+	def sort(self) -> None: # Sorts the entries.
 		if self.sorter != "":
 			self.entries.sort(key = lambda entry: entry.fields[self.sorter])
 			
