@@ -44,7 +44,7 @@ while True:
 		cmdHandler["allowedCommands"] += ["add", "info", "show"]
 
 		if len(current.entries) > 0:
-			cmdHandler["allowedCommands"] += ["edel", "emod"]
+			cmdHandler["allowedCommands"] += ["edel", "emod", "export"]
 
 		dumpHandler = {"path": dataPath + "/" + current.name + ".db", "data": current}
 		CLIbrary.aDump(dumpHandler)
@@ -162,3 +162,18 @@ while True:
 				print(cmdHandler["verboseStyle"] + "To" + Style.RESET_ALL)
 				print(entry)
 				break
+	
+	if cmd == "export":
+		if "f" in sdOpts:
+			destination = dataPath + "/" + sdOpts["f"]
+		else:
+			print(Back.RED + Fore.WHITE + "MISSING OPTION" + Style.RESET_ALL)
+			continue
+
+		exportStatus = current.export(destination)
+		
+		if exportStatus["value"] != 0:
+			print(Back.RED + Fore.WHITE + exportStatus["status"] + Style.RESET_ALL)
+		
+		else:
+			print(cmdHandler["verboseStyle"] + "EXPORTED TO " + exportStatus["destination"] + Style.RESET_ALL)

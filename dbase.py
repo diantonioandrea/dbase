@@ -105,6 +105,34 @@ class dbase:
 		else:
 			self.entries.sort(key = lambda entry: entry.fields["serial"])
 
+	def export(self, dest: str) -> dict: # Exports the database to a .csv file
+		try:
+			if ".csv" not in dest:
+				dest += ".csv"
+
+			csvFile = open(dest, "w")
+		except:
+			return {"value": -1, "status": "FILE ERROR"}
+
+		csvString = "dbase .csv export for " + self.name + "\n"
+		csvString += "serial," + ",".join(field["id"] for field in self.fields) + "\n"
+
+		if self.sorter != "":
+			csvString += "sorter: " + self.sorter + "\n"
+
+		for entry in self.entries:
+			csvString += "\n" + str(entry.fields["serial"]) + ","
+
+			csvList = []
+
+			for field in self.fields:
+				csvList.append(str(entry.fields[field["id"]]))
+
+			csvString += ",".join(csvList)
+
+		csvFile.write(csvString)
+		return {"value": 0, "status": "", "destination": dest}
+
 class dbaseEntry:
 	def __init__(self, database: dbase) -> None:
 		self.fields = {}
