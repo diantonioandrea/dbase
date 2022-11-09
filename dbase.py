@@ -118,7 +118,7 @@ class dbase:
 		csvString += "serial," + ",".join(field["id"] for field in self.fields) + "\n"
 
 		if self.sorter != "":
-			csvString += "sorter: " + self.sorter + "\n"
+			csvString += "sorter:" + self.sorter + "\n"
 
 		for entry in self.entries:
 			csvString += "\n" + str(entry.fields["serial"]) + ","
