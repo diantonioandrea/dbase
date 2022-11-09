@@ -44,7 +44,7 @@ while True:
 		cmdHandler["allowedCommands"] += ["add", "info", "show"]
 
 		if len(current.entries) > 0:
-			cmdHandler["allowedCommands"] += ["edel"]
+			cmdHandler["allowedCommands"] += ["edel", "emod"]
 
 		dumpHandler = {"path": dataPath + "/" + current.name + ".db", "data": current}
 		CLIbrary.aDump(dumpHandler)
@@ -83,6 +83,29 @@ while True:
 	if current == None:
 		continue
 
+	if cmd == "info":
+		print(str(current))
+		continue
+
+	if cmd == "show":
+		print(current.showEntries(sdOpts))
+		continue
+
+	if cmd == "add":
+		bulkNumber = 1
+
+		if "n" in sdOpts:
+			try:
+				bulkNumber = max([int(sdOpts["n"]), 1])
+
+			except(ValueError):
+				bulkNumber = 1
+				print(Back.RED + Fore.WHITE + "ARGUMENT ERROR, FALLING BACK TO 1" + Style.RESET_ALL)
+
+		for _ in range(bulkNumber):
+			current.addEntry()
+		continue
+
 	if cmd == "edel":
 		serial = -1
 
@@ -107,26 +130,35 @@ while True:
 				print(entry)
 				print(cmdHandler["verboseStyle"] + "Deleted" + Style.RESET_ALL)
 				break
+	
+	if cmd == "emod":
+		serial = -1
 
-	if cmd == "add":
-		bulkNumber = 1
-
-		if "n" in sdOpts:
+		if "s" in sdOpts and len(ddOpts) > 0:
 			try:
-				bulkNumber = max([int(sdOpts["n"]), 1])
+				serial = max([int(sdOpts["s"]), -1])
 
 			except(ValueError):
-				bulkNumber = 1
-				print(Back.RED + Fore.WHITE + "ARGUMENT ERROR, FALLING BACK TO 1" + Style.RESET_ALL)
+				print(Back.RED + Fore.WHITE + "SERIAL ERROR" + Style.RESET_ALL)
+				continue
+		
+		else:
+			print(Back.RED + Fore.WHITE + "MISSING OPTIONS" + Style.RESET_ALL)
+			continue
 
-		for _ in range(bulkNumber):
-			current.addEntry()
-		continue
+		for entry in current.entries:
+			if entry.fields["serial"] == serial:
+				toBeEdited = [field for field in current.fields if field["id"] in ddOpts]
 
-	if cmd == "info":
-		print(str(current))
-		continue
+				if len(toBeEdited) == 0:
+					print(Back.RED + Fore.WHITE + "TO BE EDITED FIELDS NOT FOUND" + Style.RESET_ALL)
+				
+				oldEntry = str(entry)
 
-	if cmd == "show":
-		print(current.showEntries(sdOpts))
-		continue
+				entry.insertField(toBeEdited)
+
+				print(cmdHandler["verboseStyle"] + "From" + Style.RESET_ALL)
+				print(oldEntry)
+				print(cmdHandler["verboseStyle"] + "To" + Style.RESET_ALL)
+				print(entry)
+				break
