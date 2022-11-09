@@ -128,10 +128,10 @@ class dbaseEntry:
 		
 		for field in fields:
 			if field["type"] == "number":
-				self.fields[field["id"]] = CLIbrary.numIn({"request": "Insert " + field["id"], "verbose": True})
+				self.fields[field["id"]] = CLIbrary.numIn({"request": "Insert " + field["id"]})
 				
 			elif field["type"] == "boolean":
-				self.fields[field["id"]] = CLIbrary.boolIn({"request": "Insert " + field["id"], "verbose": True})
+				self.fields[field["id"]] = CLIbrary.boolIn({"request": "Insert " + field["id"]})
 				
 			elif field["type"] == "string":
-				self.fields[field["id"]] = CLIbrary.strIn({"request": "Insert " + field["id"], "verbose": True})
+				self.fields[field["id"]] = CLIbrary.strIn({"request": "Insert " + field["id"]})
