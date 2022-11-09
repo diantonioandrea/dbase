@@ -69,7 +69,7 @@ class dbase:
 		# Update all entries if any
 		
 		for entry in self.entries:
-			entry.insertField([newField])
+			entry.insertFields([newField])
 			
 	def showEntries(self, sdOpts=[]) -> str:
 		# sdOpts work as queries
@@ -109,7 +109,7 @@ class dbaseEntry:
 		self.fields = {}
 		self.fields["serial"] = database.serialCounter
 		
-		self.insertField(database.fields)
+		self.insertFields(database.fields)
 		
 	def getStringSerial(self):
 		return Fore.MAGENTA + str(self.fields["serial"]) + Style.RESET_ALL
@@ -123,7 +123,7 @@ class dbaseEntry:
 				
 		return string
 		
-	def insertField(self, fields) -> None:
+	def insertFields(self, fields) -> None:
 		print("Insert field(s) for serial: " + self.getStringSerial())
 		
 		for field in fields:

@@ -155,7 +155,7 @@ while True:
 				
 				oldEntry = str(entry)
 
-				entry.insertField(toBeEdited)
+				entry.insertFields(toBeEdited)
 
 				print(cmdHandler["verboseStyle"] + "From" + Style.RESET_ALL)
 				print(oldEntry)
