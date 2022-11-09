@@ -27,5 +27,9 @@
 	"emod": {
 		"mandatoryOptions": "-s ENTRY_SERIAL --FIELD_1 ... --FIELD_N",
 		"description": "Edits the specified entry by passing its serial number and at least one field."
+	},
+	"export": {
+		"mandatoryOptions": "-f FILENAME",
+		"description": "Exports the database to a .csv file into the data/ folder."
 	}
 }
