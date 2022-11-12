@@ -28,6 +28,13 @@
 		"mandatoryOptions": "-s ENTRY_SERIAL --FIELD_1 ... --FIELD_N",
 		"description": "Edits the specified entry by passing its serial number and at least one field."
 	},
+	"fadd": {
+		"description": "Adds a new field with a dedicated prompt."
+	},
+	"fdel": {
+		"mandatoryOptions": "--FIELD",
+		"description": "Deletes the specified field by passing its serial name as a double dash option."
+	},
 	"export": {
 		"mandatoryOptions": "-f FILENAME",
 		"description": "Exports the database to a .csv file into the data/ folder."
