@@ -41,10 +41,13 @@ while True:
 	cmdHandler["helpPath"] = helpPath
 
 	if current != None:
-		cmdHandler["allowedCommands"] += ["add", "info", "show"]
+		cmdHandler["allowedCommands"] += ["add", "fadd", "info", "show"]
 
 		if len(current.entries) > 0:
 			cmdHandler["allowedCommands"] += ["edel", "emod", "export"]
+
+		if len(current.fields) > 1:
+			cmdHandler["allowedCommands"] += ["fdel"]
 
 		dumpHandler = {"path": dataPath + "/" + current.name + ".db", "data": current}
 		CLIbrary.aDump(dumpHandler)
@@ -62,8 +65,11 @@ while True:
 	if cmd == "help":
 		print(output)
 
+		continue
+
 	if cmd == "new":
 		current = dbase.dbase(CLIbrary.strIn({"request": "Database name", "noSpace": True}))
+
 		continue
 
 	if cmd == "load":
@@ -78,6 +84,7 @@ while True:
 
 		loadHandler = {"path": dataPath + toBeLoaded}
 		current = CLIbrary.aLoad(loadHandler)
+
 		continue
 
 	if current == None:
@@ -85,10 +92,12 @@ while True:
 
 	if cmd == "info":
 		print(str(current))
+
 		continue
 
 	if cmd == "show":
 		print(current.showEntries(sdOpts))
+
 		continue
 
 	if cmd == "add":
@@ -104,6 +113,17 @@ while True:
 
 		for _ in range(bulkNumber):
 			current.addEntry()
+
+		continue
+
+	if cmd == "fadd":
+
+		if len(current.entries) == 0:
+			current.addField()
+		
+		elif CLIbrary.boolIn({"request": "Add a new field"}):
+			current.addField()
+
 		continue
 
 	if cmd == "edel":
@@ -130,6 +150,28 @@ while True:
 				print(entry)
 				print(cmdHandler["verboseStyle"] + "Deleted" + Style.RESET_ALL)
 				break
+				
+		continue
+	
+	if cmd == "fdel":
+		if len(set(ddOpts).intersection(set([field["id"] for field in current.fields]))) == 0:
+			print(Back.RED + Fore.WHITE + "FIELD NOT FOUND" + Style.RESET_ALL)
+			continue
+
+		for field in current.fields:
+			if field["id"] in ddOpts:
+				current.fields.remove(field)
+
+				if current.sorter == field["id"]:
+					current.sorter = ""
+
+				for entry in current.entries:
+					del entry.fields[field["id"]]
+		
+				print(cmdHandler["verboseStyle"] + field["id"] + " DELETED" + Style.RESET_ALL)
+				break
+		
+		continue
 	
 	if cmd == "emod":
 		serial = -1
@@ -162,6 +204,8 @@ while True:
 				print(cmdHandler["verboseStyle"] + "To" + Style.RESET_ALL)
 				print(entry)
 				break
+				
+		continue
 	
 	if cmd == "export":
 		if "f" in sdOpts:
@@ -177,3 +221,5 @@ while True:
 		
 		else:
 			print(cmdHandler["verboseStyle"] + "EXPORTED TO " + exportStatus["destination"] + Style.RESET_ALL)
+		
+		continue
