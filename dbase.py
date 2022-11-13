@@ -81,25 +81,25 @@ class dbase:
 		for queryKey in queries:
 			try:
 				if queryFlag == "in":
-					toBeShown = [entry for entry in toBeShown if queries[queryKey] in str(entry.fields[queryKey])]
+					toBeShown = [entry for entry in toBeShown if str(queries[queryKey]).lower() in str(entry.fields[queryKey])]
 				
 				elif queryFlag == "eq":
-					toBeShown = [entry for entry in toBeShown if queries[queryKey] == str(entry.fields[queryKey])]
+					toBeShown = [entry for entry in toBeShown if str(queries[queryKey]).lower() == str(entry.fields[queryKey])]
 				
 				elif queryFlag == "neq":
-					toBeShown = [entry for entry in toBeShown if queries[queryKey] != str(entry.fields[queryKey])]
+					toBeShown = [entry for entry in toBeShown if str(queries[queryKey]).lower() != str(entry.fields[queryKey])]
 				
 				elif queryFlag == "gt":
-					toBeShown = [entry for entry in toBeShown if queries[queryKey] > str(entry.fields[queryKey])]
+					toBeShown = [entry for entry in toBeShown if str(queries[queryKey]).lower() > str(entry.fields[queryKey])]
 				
 				elif queryFlag == "geq":
-					toBeShown = [entry for entry in toBeShown if queries[queryKey] >= str(entry.fields[queryKey])]
+					toBeShown = [entry for entry in toBeShown if str(queries[queryKey]).lower() >= str(entry.fields[queryKey])]
 				
 				elif queryFlag == "lt":
-					toBeShown = [entry for entry in toBeShown if queries[queryKey] < str(entry.fields[queryKey])]
+					toBeShown = [entry for entry in toBeShown if str(queries[queryKey]).lower() < str(entry.fields[queryKey])]
 				
 				elif queryFlag == "leq":
-					toBeShown = [entry for entry in toBeShown if queries[queryKey] <= str(entry.fields[queryKey])]
+					toBeShown = [entry for entry in toBeShown if str(queries[queryKey]).lower() <= str(entry.fields[queryKey])]
 			except:
 				pass
 		
