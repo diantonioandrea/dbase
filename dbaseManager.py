@@ -92,11 +92,11 @@ while True:
 		continue
 
 	if cmd == "show":
-		if len(sdOpts) > 0 and len(ddOpts) == 0:
+		if (len(sdOpts) > 0 and len(ddOpts) == 0) or (len(ddOpts) > 1):
 			print(Back.RED + Fore.WHITE + "INCONSISTENT QUERIES" + Style.RESET_ALL)
 			continue
 
-		print(current.showEntries(sdOpts, ddOpts))
+		print(current.showEntries(sdOpts, ddOpts[0]))
 		continue
 
 	if cmd == "add":
