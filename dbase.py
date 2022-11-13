@@ -73,7 +73,7 @@ class dbase:
 			entry.insertFields([newField])
 			
 	def showEntries(self, queries=[], queryFlag="") -> str: # Shows and queries entries.
-		# sdOpts from CLIbrary work as queries.
+		# sdOpts and ddOpts from CLIbrary work as queries.
 		
 		self.sort()
 		toBeShown = self.entries

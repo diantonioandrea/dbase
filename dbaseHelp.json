@@ -17,8 +17,8 @@
 		"description": "Shows database's infos."
 	},
 	"show": {
-		"options": "-FIELD_1 QUERY_1 ... -FIELD_N QUERY_N",
-		"description": "Prints the database entries with optional queries passed as single dash options."
+		"options": "-FIELD_1 QUERY_1 ... -FIELD_N QUERY_N --QUERYFLAG",
+		"description": "Prints the database entries with optional queries passed as single dash options and a query mode passed as a double dash option. The available flags are: in, eq, neq, gt, lt, geq, leq."
 	},
 	"edel": {
 		"mandatoryOptions": "-s ENTRY_SERIAL",
