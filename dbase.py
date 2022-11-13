@@ -72,22 +72,40 @@ class dbase:
 		for entry in self.entries:
 			entry.insertFields([newField])
 			
-	def showEntries(self, sdOpts=[]) -> str: # Shows and queries entries.
-		# sdOpts work as queries.
+	def showEntries(self, queries=[], queryFlag="") -> str: # Shows and queries entries.
+		# sdOpts from CLIbrary work as queries.
 		
 		self.sort()
 		toBeShown = self.entries
 		
-		for queryKey in sdOpts:
+		for queryKey in queries:
 			try:
-				toBeShown = [entry for entry in toBeShown if sdOpts[queryKey] in str(entry.fields[queryKey])]
+				if queryFlag == "in":
+					toBeShown = [entry for entry in toBeShown if queries[queryKey] in str(entry.fields[queryKey])]
 				
+				elif queryFlag == "eq":
+					toBeShown = [entry for entry in toBeShown if queries[queryKey] == str(entry.fields[queryKey])]
+				
+				elif queryFlag == "neq":
+					toBeShown = [entry for entry in toBeShown if queries[queryKey] != str(entry.fields[queryKey])]
+				
+				elif queryFlag == "gt":
+					toBeShown = [entry for entry in toBeShown if queries[queryKey] > str(entry.fields[queryKey])]
+				
+				elif queryFlag == "geq":
+					toBeShown = [entry for entry in toBeShown if queries[queryKey] >= str(entry.fields[queryKey])]
+				
+				elif queryFlag == "lt":
+					toBeShown = [entry for entry in toBeShown if queries[queryKey] < str(entry.fields[queryKey])]
+				
+				elif queryFlag == "leq":
+					toBeShown = [entry for entry in toBeShown if queries[queryKey] <= str(entry.fields[queryKey])]
 			except:
 				pass
 		
 		string = "Entries for database: " + self.name
 		
-		if len(sdOpts) > 0:
+		if len(queries) > 0:
 			string += ", queried\nShowing " + str(len(toBeShown)) + " out of " + str(len(self.entries)) + " entries"
 		
 		for entry in toBeShown:
