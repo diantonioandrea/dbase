@@ -64,12 +64,10 @@ while True:
 
 	if cmd == "help":
 		print(output)
-
 		continue
 
 	if cmd == "new":
 		current = dbase.dbase(CLIbrary.strIn({"request": "Database name", "noSpace": True}))
-
 		continue
 
 	if cmd == "load":
@@ -84,7 +82,6 @@ while True:
 
 		loadHandler = {"path": dataPath + toBeLoaded}
 		current = CLIbrary.aLoad(loadHandler)
-
 		continue
 
 	if current == None:
@@ -92,12 +89,14 @@ while True:
 
 	if cmd == "info":
 		print(str(current))
-
 		continue
 
 	if cmd == "show":
-		print(current.showEntries(sdOpts))
+		if len(sdOpts) > 0 and len(ddOpts) == 0:
+			print(Back.RED + Fore.WHITE + "INCONSISTENT QUERIES" + Style.RESET_ALL)
+			continue
 
+		print(current.showEntries(sdOpts, ddOpts))
 		continue
 
 	if cmd == "add":
