@@ -96,7 +96,7 @@ while True:
 			print(Back.RED + Fore.WHITE + "INCONSISTENT QUERIES" + Style.RESET_ALL)
 			continue
 
-		print(current.showEntries(sdOpts, ddOpts[0]))
+		print(current.showEntries(sdOpts, ddOpts[0] if len(ddOpts) > 0 else ""))
 		continue
 
 	if cmd == "add":

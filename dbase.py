@@ -89,16 +89,16 @@ class dbase:
 				elif queryFlag == "neq":
 					toBeShown = [entry for entry in toBeShown if str(queries[queryKey]).lower() != str(entry.fields[queryKey])]
 				
-				elif queryFlag == "gt":
+				elif queryFlag == "lt":
 					toBeShown = [entry for entry in toBeShown if str(queries[queryKey]).lower() > str(entry.fields[queryKey])]
 				
-				elif queryFlag == "geq":
+				elif queryFlag == "leq":
 					toBeShown = [entry for entry in toBeShown if str(queries[queryKey]).lower() >= str(entry.fields[queryKey])]
 				
-				elif queryFlag == "lt":
+				elif queryFlag == "gt":
 					toBeShown = [entry for entry in toBeShown if str(queries[queryKey]).lower() < str(entry.fields[queryKey])]
 				
-				elif queryFlag == "leq":
+				elif queryFlag == "geq":
 					toBeShown = [entry for entry in toBeShown if str(queries[queryKey]).lower() <= str(entry.fields[queryKey])]
 			except:
 				pass
