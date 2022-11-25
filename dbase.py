@@ -50,7 +50,7 @@ class dbase:
 		fieldHandler["request"] = "Field identifier"
 		fieldHandler["blockedAnswers"] = ["serial"]
 		typeHandler["request"] = "Field type"
-		typeHandler["allowedAnswers"] = ["number", "string"]
+		typeHandler["allowedAnswers"] = ["number", "string", "date"]
 		
 		newField["id"] = CLIbrary.strIn(fieldHandler)
 
@@ -182,3 +182,6 @@ class dbaseEntry:
 				
 			elif field["type"] == "string":
 				self.fields[field["id"]] = CLIbrary.strIn({"request": "Insert " + field["id"]})
+			
+			elif field["type"] == "date":
+				self.fields[field["id"]] = CLIbrary.dateIn({"request": "Insert " + field["id"]})
