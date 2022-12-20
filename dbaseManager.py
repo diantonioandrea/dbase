@@ -26,12 +26,14 @@ current = None
 
 while True:
 	try: # Define a "shell prompt".
-		cmdString = os.getlogin() + "@dbase"
+		cmdString = "[" + os.getlogin() + "@dbase"
 	except:
-		cmdString = "unknown@dbase"
+		cmdString = "[unknown@dbase"
 
 	if current != None:
 		cmdString += "+" + current.name
+
+	cmdString += "]"
 
 	cmdHandler = {}
 	cmdHandler["request"] = cmdString
