@@ -1,3 +1,5 @@
+# Linux and macOS only
+
 manager:
 	pyinstaller --onefile --console dbaseManager.py
 	mv dist/dbaseManager .
